@@ -85,7 +85,12 @@
   animation: sk-foldCubeAngle 2.4s infinite linear both;
   transform-origin: 100% 100%;
 }
-
+    iframe#adFrame {
+      width: 100%;
+      border: none;
+      display: block;
+      transition: height 0.3s ease;
+    }
 .folding .sk-cube2 {
   transform: scale(1.1) rotateZ(90deg);
 }
@@ -254,8 +259,61 @@
 
     <br>
     <br>
+    <br>    <br>
     <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>
+    
+<div id="adsContainer">
+    <p>Loading ads...</p>
+  </div>
 
+  <script>
+    // Load the iframe dynamically
+    window.addEventListener('load', function() {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://youbot.store/ads.php';
+      iframe.id = 'adFrame';
+      iframe.loading = 'lazy';
+      
+      const container = document.getElementById('adsContainer');
+      container.innerHTML = ''; 
+      container.appendChild(iframe);
+    });
+
+    // Listen for height messages from the iframe
+    window.addEventListener('message', function(event) {
+      // Always verify the origin for security
+      if (event.origin !== 'https://youbot.store') return;
+
+      const data = event.data;
+      if (data && data.type === 'resize' && data.height) {
+        const iframe = document.getElementById('adFrame');
+        iframe.style.height = data.height + 'px';
+      }
+    });
+  </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
     
@@ -444,4 +502,5 @@
     });
         </script>
 </body>
+
 </html>
