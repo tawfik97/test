@@ -285,33 +285,36 @@
     <br>
     <br>
     
-<div id="adsContainer">
-    <p>Loading ads...</p>
-  </div>
+<div id="ads-container"></div>
 
   <script>
-    // Load the iframe dynamically
+    // Wait 10 seconds after page load
     window.addEventListener('load', function() {
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://youbot.store/ads.php';
-      iframe.id = 'adFrame';
-      iframe.loading = 'lazy';
-      
-      const container = document.getElementById('adsContainer');
-      container.innerHTML = ''; 
-      container.appendChild(iframe);
-    });
+      setTimeout(function() {
+        // Create ad container dynamically
+        const adContainer = document.getElementById('ads-container');
 
-    // Listen for height messages from the iframe
-    window.addEventListener('message', function(event) {
-      // Always verify the origin for security
-      if (event.origin !== 'https://youbot.store') return;
+        // Insert the ad script (can repeat if you want multiple ads)
+        for (let i = 0; i < 5; i++) { // change number as needed
+          const adScript = document.createElement('script');
+          adScript.type = 'text/javascript';
+          adScript.innerHTML = `
+            atOptions = {
+              'key' : '3e4ddd133915df6908f7242a6768849d',
+              'format' : 'iframe',
+              'height' : 50,
+              'width' : 320,
+              'params' : {}
+            };
+          `;
+          adContainer.appendChild(adScript);
 
-      const data = event.data;
-      if (data && data.type === 'resize' && data.height) {
-        const iframe = document.getElementById('adFrame');
-        iframe.style.height = data.height + 'px';
-      }
+          const invokeScript = document.createElement('script');
+          invokeScript.type = 'text/javascript';
+          invokeScript.src = '//www.highperformanceformat.com/3e4ddd133915df6908f7242a6768849d/invoke.js';
+          adContainer.appendChild(invokeScript);
+        }
+      }, 10000); // 10000 ms = 10 seconds
     });
   </script>
 
@@ -504,3 +507,4 @@
 </body>
 
 </html>
+
