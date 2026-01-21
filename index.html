@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -286,53 +281,7 @@
     <br>
   <div id="ads-container"></div>
 
-  <script>
-    const adKey = 'fe2cb3936ed7883a2044244a1c6bd01c';
-    const adSrc = `//www.highperformanceformat.com/${adKey}/invoke.js`;
-    const adWidth = 320;
-    const adHeight = 50;
-    const numberOfAds = 1; // number of ad boxes
-    const refreshInterval = 7000; // refresh every 30s
 
-    function loadAds() {
-      const container = document.getElementById('ads-container');
-      container.innerHTML = ''; // clear old ads
-
-      for (let i = 0; i < numberOfAds; i++) {
-        const adDiv = document.createElement('div');
-        adDiv.className = 'ad-slot';
-        adDiv.id = `ad-slot-${Date.now()}-${i}`;
-        container.appendChild(adDiv);
-
-        // Inject ad script
-        const adScript = document.createElement('script');
-        adScript.type = 'text/javascript';
-        adScript.innerHTML = `
-          atOptions = {
-            'key': '${adKey}',
-            'format': 'iframe',
-            'height': ${adHeight},
-            'width': ${adWidth},
-            'params': {}
-          };
-        `;
-        adDiv.appendChild(adScript);
-
-        const invokeScript = document.createElement('script');
-        invokeScript.type = 'text/javascript';
-        invokeScript.src = adSrc + '?r=' + Math.random(); // random query prevents caching
-        adDiv.appendChild(invokeScript);
-      }
-    }
-
-    // Wait 10s after page load
-    window.addEventListener('load', function() {
-      setTimeout(() => {
-        loadAds();
-        setInterval(loadAds, refreshInterval);
-      }, 10000);
-    });
-  </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
     
@@ -523,6 +472,7 @@
 </body>
 
 </html>
+
 
 
 
